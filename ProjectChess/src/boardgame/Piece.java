@@ -1,6 +1,6 @@
 package boardgame;
 
-public class Piece {
+public abstract class Piece {
 
 	protected Position position; //ela e protected pois e uma posicao simples de matriz, nao aparece na camada chess
 	private Board board;
@@ -14,8 +14,23 @@ public class Piece {
 		return board;
 	}
 
+	public abstract boolean[][] possibleMoves();
 	
+	public boolean possibleMove(Position position) {
+		return possibleMoves()[position.getRow()][position.getColumn()]; // metodo concreto utilizando um metodo abstrato
+	}
 	
+	public boolean isThereAnyPossibleMove() {
+		boolean[][] mat = possibleMoves(); // mais um metodo padrao que depende de um metodo abstrato
+		for(int i=0;i<mat.length;i++) {
+			for(int j=0;j<mat.length; j++) {
+				if(mat[i][j]) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 	
 }
