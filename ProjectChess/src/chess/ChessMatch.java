@@ -1,6 +1,8 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
+import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
@@ -21,6 +23,28 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 			}
 		}
 		return mat;
+	}
+	
+	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) { // posicao de origem e posicao de destino;
+		Position source = sourcePosition.toPosition(); // convertemos para posicao da matriz
+		Position target = targetPosition.toPosition();
+		validateSourcePosition(source); // validamos se tem uma peca nessa posicao
+		Piece capturedPiece = makeMove(source, target); 
+		return (ChessPiece)capturedPiece; //downcasting para chessPiece, pois a peca capturada era do tipo Piece, como vimos em cima.
+	}
+	
+	private Piece makeMove(Position source, Position target) { 
+		Piece p = board.removePiece(source); // retiramos a peca na posicao de origem
+		Piece capturedPiece = board.removePiece(target); // removemos a posivel peca na posicao target
+		board.placePiece(p, target); //agora colocamos a p em target
+		return capturedPiece; 
+	}
+	
+	
+	private void validateSourcePosition(Position position) {
+		if(!board.ThereIsAPiece(position)) { // ! se nao existir uma peca nessa posicao
+			throw new ChessException("There is no piece on source position");
+		}
 	}
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) { //  uma operacao de colocar pecas passando as posicoes na coordenadas  do xadrez

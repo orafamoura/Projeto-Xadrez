@@ -45,6 +45,19 @@ public class Board {
 		 piece.position = position; // essa peca nao esta mais na posicao null, a posicao da peca e acessivel diretamente por estar como protected em class piece
 	}
 	
+	public Piece removePiece(Position position) { //remover uma peca de uma posicao no tabuleiro
+		if(!positionExists(position)) {
+			throw new BoardException("Position not on the board");
+		}
+		if(piece(position) == null) {
+			return null;
+		}
+		Piece aux = piece(position);
+		aux.position = null;
+		pieces[position.getRow()][position.getColumn()] = null;
+		return aux;
+	}
+	
 	private boolean positionExists(int row, int column) {  // fica mais facil testar pela linha e coluna
 		return row >= 0 && row < rows && column >= 0 && column < columns; 
 	}
