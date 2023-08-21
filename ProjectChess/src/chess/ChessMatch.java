@@ -23,15 +23,25 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 		return mat;
 	}
 	
-	private void placeNewPiece(char column, int row, ChessPiece piece) {
+	private void placeNewPiece(char column, int row, ChessPiece piece) { //  uma operacao de colocar pecas passando as posicoes na coordenadas  do xadrez
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
 	}
 	
 	
-	private void initialSetup() {
-		placeNewPiece('b', 6, new Rook(board,Color.WHITE));
-		placeNewPiece('e', 8, new King(board,Color.BLACK));
-		placeNewPiece('e', 1, new King(board,Color.WHITE));
+	private void initialSetup() { // responsavel por iniciar a partida de xadrez, por colocar as pecas no tabuleiro
+		placeNewPiece('c', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('c', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 1, new King(board, Color.WHITE));
+//depois de criar o metodo ChessPosition conseguimos colocar as posicoes sem ser pela matriz
+        placeNewPiece('c', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('c', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('d', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('e', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('e', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('d', 8, new King(board, Color.BLACK));
 	}
 	
 	
