@@ -7,12 +7,24 @@ import chess.pieces.King;
 import chess.pieces.Rook;
 
 public class ChessMatch { //nessa classe vai ter as regras do xadrez
-
+	
+	private int turn;
+	private Color currentPlayer;
 	private Board board;
 	
 	public ChessMatch() {
 		board = new Board(8, 8); // tamanho do tabuleiro
+		turn = 1;
+		currentPlayer = Color.WHITE;
 		initialSetup();
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 	
 	public ChessPiece[][] getPieces(){ // retorna uma matriz de pecas de xadrez correspondentes a essa partida
@@ -37,6 +49,7 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 		validateSourcePosition(source); // validamos se tem uma peca nessa posicao
 		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target); 
+		nextTurn();
 		return (ChessPiece)capturedPiece; //downcasting para chessPiece, pois a peca capturada era do tipo Piece, como vimos em cima.
 	}
 	
@@ -52,6 +65,9 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 		if(!board.ThereIsAPiece(position)) { // ! se nao existir uma peca nessa posicao
 			throw new ChessException("There is no piece on source position");
 		}
+		if(currentPlayer != ((ChessPiece)board.piece(position)).getColor()) {
+			throw new ChessException("The chosen piece is not yours");
+		}
 		if (!board.piece(position).isThereAnyPossibleMove()) {
 			throw new ChessException("there is no possible moves for the chosen piece");
 		}
@@ -63,6 +79,10 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 		}
 	}
 	
+	private void nextTurn() {
+		turn++;
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+	}
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) { //  uma operacao de colocar pecas passando as posicoes na coordenadas  do xadrez
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
