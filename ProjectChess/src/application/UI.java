@@ -49,30 +49,34 @@ public class UI {
 		}
 	}
 	
-	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
+	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) { // mostra o turno e esperando jogador
 		printBoard(chessMatch.getPieces());
 		System.out.println();
 		printCapturedPieces(captured);
+		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
 		System.out.println("waiting player: " + chessMatch.getCurrentPlayer());
+		if(chessMatch.getCheck()) {
+			System.out.println("CHECK!");
+		}
 	}
 	
 	public static void printBoard(ChessPiece[][] pieces) { //
 		for (int i = 0; i < pieces.length; i++) { // essa logica imprime o tabuleiro no formato adequado
 			System.out.print((8 - i) + " "); // imprime do 8 ate o 1
 			for (int j = 0; j < pieces.length; j++) {
-				printPiece(pieces[i][j], false); // imprime a peca
+				printPiece(pieces[i][j], false); // imprime a peca, e o false e pra que nenhuma peca tenha o fundo colorido
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
 	}
 	
-	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) { //
-		for (int i = 0; i < pieces.length; i++) { // 
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) { //sobrecarga do printboard de cima, 
+		for (int i = 0; i < pieces.length; i++) { // recebe uma matriz de movimentos Possiveis -  boolean[][] possibleMoves
 			System.out.print((8 - i) + " "); // 
 			for (int j = 0; j < pieces.length; j++) {
-				printPiece(pieces[i][j], possibleMoves[i][j]); // 
+				printPiece(pieces[i][j], possibleMoves[i][j]); // com o possible moves, ele pinta o fundo dependendo dela.
 			}
 			System.out.println();
 		}
@@ -80,8 +84,8 @@ public class UI {
 	}
 
 	private static void printPiece(ChessPiece piece, boolean background) { // aqui e um metodo que imprime 1 peca
-		if(background) {
-			System.out.print(ANSI_BLUE_BACKGROUND);
+		if(background) { 
+			System.out.print(ANSI_BLUE_BACKGROUND); // colori os possiveis movimentos da peca
 		}
 		if (piece == null) { // se a peca for igual a null, nao tinha uma peca nessa posicao do tabuleiro
 			System.out.print("-" + ANSI_RESET);
@@ -95,14 +99,14 @@ public class UI {
 		System.out.print(" ");
 	}
 	
-	private static void printCapturedPieces(List<ChessPiece> captured) {
-		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+	private static void printCapturedPieces(List<ChessPiece> captured) { // ele mostra as pecas capturadas na tela
+		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList()); //lista de pecas capturadas com filtro com todos da cor branca
 		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
 		System.out.println("Captured pieces: ");
 		System.out.print("White: ");
 		System.out.print(ANSI_WHITE);
 		System.out.println(Arrays.toString(white.toArray()));
-		System.out.print(ANSI_RESET);
+		System.out.print(ANSI_RESET); // reseta a cor da impresao
 		System.out.print("Black: ");
 		System.out.print(ANSI_YELLOW);
 		System.out.println(Arrays.toString(black.toArray()));

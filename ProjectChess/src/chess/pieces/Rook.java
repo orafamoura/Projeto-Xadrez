@@ -22,14 +22,14 @@ public class Rook extends ChessPiece {
 
 		Position p = new Position(0,0);
 		
-		//above
-		p.setValues(position.getRow() - 1, position.getColumn());
-		while(getBoard().positionExists(p) && !getBoard().ThereIsAPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-			p.setRow(p.getRow() - 1);
+		//above  --  enquanto a posicao for valida e estiver vazia
+		p.setValues(position.getRow() - 1, position.getColumn()); // posicao p recebe a posicao da peca, com a linha acima(-1) e a coluna no mesmo lugar
+		while(getBoard().positionExists(p) && !getBoard().ThereIsAPiece(p)) { // enquanto a posicao p existir e nao tiver uma peca
+			mat[p.getRow()][p.getColumn()] = true; // entramos na matriz mat e marcamos como true
+			p.setRow(p.getRow() - 1); //aqui anda mais 1 pra cima
 		}
-		if(getBoard().positionExists(p)&& isThereOpponentPiece(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
+		if(getBoard().positionExists(p)&& isThereOpponentPiece(p)) { // se posicao existente p for verdadeira, e onde tem um inimigo verdadeiro tambem 
+			mat[p.getRow()][p.getColumn()] = true; // marcar como true
 		}
 		//left
 		p.setValues(position.getRow(), position.getColumn() - 1);

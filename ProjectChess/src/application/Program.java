@@ -27,14 +27,14 @@ public class Program {
 
 				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 				UI.clearScreen();
-				UI.printBoard(chessMatch.getPieces(), possibleMoves);
+				UI.printBoard(chessMatch.getPieces(), possibleMoves); //sobrecarga no UI
 				System.out.println();
 				System.out.print("Target: ");
 				ChessPosition target = UI.readChessPosition(sc);
 
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 				
-				if (capturedPiece != null) {
+				if (capturedPiece != null) { // se a peca capturada for diferente de nulo, aparece a peca capturada na lista
 					captured.add(capturedPiece);
 				}
 				
