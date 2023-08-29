@@ -83,7 +83,8 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 	}
 	
 	private Piece makeMove(Position source, Position target) { 
-		Piece p = board.removePiece(source); // retiramos a peca na posicao de origem
+		ChessPiece p = (ChessPiece)board.removePiece(source); // retiramos a peca na posicao de origem
+		p.increasedMoveCount();
 		Piece capturedPiece = board.removePiece(target); // removemos a posivel peca na posicao target
 		board.placePiece(p, target); //agora colocamos a p em target
 		
@@ -96,7 +97,8 @@ public class ChessMatch { //nessa classe vai ter as regras do xadrez
 	}
 	
 	private void undoMove(Position source, Position target, Piece capturedPiece) { // retorna a peca capturada
-		Piece p = board.removePiece(target);
+		ChessPiece p = (ChessPiece)board.removePiece(target);
+		p.decreaseMoveCount();
 		board.placePiece(p, source);
 		
 		if(capturedPiece != null) {
