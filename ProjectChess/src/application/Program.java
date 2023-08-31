@@ -27,23 +27,27 @@ public class Program {
 
 				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 				UI.clearScreen();
-				UI.printBoard(chessMatch.getPieces(), possibleMoves); //sobrecarga no UI
+				UI.printBoard(chessMatch.getPieces(), possibleMoves); // sobrecarga no UI
 				System.out.println();
 				System.out.print("Target: ");
 				ChessPosition target = UI.readChessPosition(sc);
 
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
-				
-				if (capturedPiece != null) { // se a peca capturada for diferente de nulo, aparece a peca capturada na lista
+
+				if (capturedPiece != null) { // se a peca capturada for diferente de nulo, aparece a peca capturada na
+												// lista
 					captured.add(capturedPiece);
 				}
-				
-				if(chessMatch.getPromoted() != null) {
+
+				if (chessMatch.getPromoted() != null) {
 					System.out.print("Enter piece for promotion(B/H/R/Q):");
-					String type = sc.nextLine();
+					String type = sc.nextLine().toUpperCase();
+					while (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q")) {
+						System.out.print("Invalid value! Enter piece for promotion(B/H/R/Q):");						
+					}
 					chessMatch.replacePromotedPiece(type);
 				}
-				
+
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();

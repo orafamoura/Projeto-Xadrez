@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="boardgame.Piece"/>
+    <fullyQualifiedTypeName name="boardgame.BoardException"/>
+    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+    <fullyQualifiedTypeName name="chess.ChessPosition"/>
+    <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
+    <fullyQualifiedTypeName name="boardgame.Position"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
+    <fullyQualifiedTypeName name="chess.ChessException"/>
+    <fullyQualifiedTypeName name="chess.pieces.Pawn"/>
+    <fullyQualifiedTypeName name="chess.pieces.Bishop"/>
+    <fullyQualifiedTypeName name="chess.pieces.Knight"/>
+    <fullyQualifiedTypeName name="chess.ChessPiece"/>
+    <fullyQualifiedTypeName name="chess.pieces.Queen"/>
+    <fullyQualifiedTypeName name="chess.ChessMatch"/>
+    <fullyQualifiedTypeName name="chess.Color"/>
+</qualifiedTypeNameHistroy>
